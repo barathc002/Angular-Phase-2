@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: Health-api-gateway
+  
+  cloud:
+    gateway:
+      routes:
+      - id: doctor-service
+        uri: lb://DOCTOR-SERVICE
+        predicates:
+          - Path=/doctors/**
+      - id: appointment-service
+        uri: lb://APPOINTMENT-SERVICE
+        predicates:
+          - Path=/appointments/**
+server:
+  port: 8080
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+ 
+  
